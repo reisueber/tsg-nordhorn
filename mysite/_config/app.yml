@@ -1,0 +1,10 @@
+SilverStripe\Security\Member:
+  extensions:
+    - MyMemberExtension
+    
+---
+Only:
+  environment: 'dev'
+---
+SilverStripe\Security\BasicAuth:
+  entire_site_protected: false

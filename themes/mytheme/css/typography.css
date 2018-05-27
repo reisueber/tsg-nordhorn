@@ -1,0 +1,23 @@
+
+@font-face {
+    font-family: 'Freeport';
+    src: url('./../fonts/FreeportPlain.woff2') format('woff2'),
+    url('./../fonts/FreeportPlain.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5{
+    font-family: 'Freeport', sans-serif;
+}
+
+h1{ font-size: 40px; }
+h2{ font-size: 30px; }
+
+p{
+    font-family: 'Work Sans', sans-serif;
+}
+
+.navbar-brand{
+    font-family: 'Freeport';
+}

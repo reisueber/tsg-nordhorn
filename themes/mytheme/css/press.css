@@ -1,0 +1,14 @@
+.galleryimage{ padding: 0 2px; }
+.yearsOfArticles .current{ font-weight: bold; }
+
+.yearsOfArticles .current .md-icon{
+	font-size: 12px;
+	line-height: 1;
+	width: 12px;
+	height: 12px;
+}
+
+.main-image{
+	height: 300px;
+	overflow: hidden;
+}

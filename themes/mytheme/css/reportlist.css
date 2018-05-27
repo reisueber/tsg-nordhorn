@@ -1,0 +1,112 @@
+td.day, td.dow{ font-size: 12px; }
+
+/*.table-striped tbody tr:nth-of-type(odd){ background: rgba(91,164,255,.05); }*/
+tr.selected{ background: #e7f7ff !important; }
+tr.expired{ background: rgba(0,0,0,.02) !important; color: #ddd; }
+
+input{ width: 100%; }
+
+.fade-enter-active, .fade-leave-active {
+	transition: all .5s ease;
+	height: 300px;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
+	height: 0;
+}
+
+.form-area{
+	background-color: #fbfbfb;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px solid #f1f1f1;
+}
+
+.controls{
+	margin: 10px 0 20px 0;
+}
+
+#TournamentForm{ padding: 10px 0 20px 0; }
+
+
+
+/* label */
+label{
+	flex-basis: 100px;
+}
+
+@media (max-width: 730px){
+	label{ flex-basis: 200px; }
+}
+
+/* profil-group */
+.profil-group{
+	margin: 10px 0;
+}
+
+@media (min-width: 750px){
+	.profil-group{
+		display: flex;
+	}
+}
+
+/* profil-item */
+.profil-item{
+	flex: 1;
+	align-items: center;
+	margin: 0 10px;
+}
+
+@media (min-width: 400px){
+	.profil-item{
+		display: flex;
+	}
+}
+
+.fade-enter-active {
+	transition: all .3s ease;
+}
+.fade-leave-active {
+	transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fade-enter, .fade-leave-to
+	/* .slide-fade-leave-active below version 2.1.8 */ {
+	transform: translateX(10px);
+	opacity: 0;
+}
+
+/* status tag */
+.status-tag{
+	background-color: rgba(64,158,255,.1);
+	border: 1px solid rgba(64,158,255,.2);
+	color: #409eff;
+    display: inline-block;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.status-tag.green{
+	background-color: rgba(103,194,58,.1);
+    border-color: rgba(103,194,58,.2);
+    color: #67c23a;
+}
+.status-tag.red{
+	background-color: hsla(0,87%,69%,.1);
+    border-color: hsla(0,87%,69%,.2);
+    color: #f56c6c;
+}
+.status-tag.yellow{
+	background-color: rgba(230,162,60,.1);
+    border-color: rgba(230,162,60,.2);
+    color: #e6a23c;
+}
+tr.expired .status-tag{
+	background-color: rgba(190,190,190,.1);
+    border-color: rgba(205,205,205,.2);
+    color: #dee2e6;
+}

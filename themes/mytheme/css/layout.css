@@ -1,0 +1,196 @@
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+}
+
+.container{
+	position: relative;
+}
+
+.controller{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+p{ margin: 20px 0; }
+
+a{ color: black; }
+
+[v-cloak] > * { display:none }
+[v-cloak]::before { content: "loading…" }
+
+.img-responsive{
+	width: 100%;
+}
+
+.round-image{
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	overflow: hidden;
+}
+
+.round-image.small img{
+	width: 100px;
+}
+
+.striped .item:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+.striped .item{
+	padding: 40px 10px;
+}
+.item{
+	border-bottom: 1px solid #ddd;
+}
+
+.clickable-row{
+	cursor: pointer;
+}
+
+
+
+/* ----------------------------------------------- NAVBAR ----------------------------------------------- */
+.navbar{ padding: 0 1rem; }
+@media (max-width: 768px){ .navbar{ padding: 10px; }}
+
+.navbar.bg-blue{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00528c+0,00285e+100 */
+	background: #00528c; /* Old browsers */
+	background: -moz-linear-gradient(top, #00528c 0%, #00285e 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #00528c 0%,#00285e 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #00528c 0%,#00285e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00528c', endColorstr='#00285e',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar .navbar-brand{ font-size: 30px; }
+.navbar .nav-link{ color: white; padding: 1.5rem 1rem !important; }
+.navbar .nav-link.current{
+	background: #04225d;
+	color: white;
+	-webkit-box-shadow:inset 0 0 5px 1px rgba(0,0,0,0.2);
+	box-shadow:inset 0 0 5px 1px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu{
+	-webkit-box-shadow: 0 2px 5px 1px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 5px 1px rgba(0,0,0,0.2);
+}
+.dropdown-menu .dropdown-item{ font-size: 12px; }
+
+/*-- searchfield --*/
+.searchfield{ display: none; }
+@media (min-width: 900px){ .searchfield{ display: block; }}
+
+/*-- Redline --*/
+.red-line{ position: fixed; width: 100%; height: 3px; background: #b90a12; top: 60px; }
+@media (min-width: 768px){ .red-line{ top: 68px; }}
+
+.btn-login{
+	background-image: -webkit-linear-gradient(top,#337ab7 0,#265a88 100%);
+	background-image: -o-linear-gradient(top,#337ab7 0,#265a88 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#337ab7),to(#265a88));
+	background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff265a88', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	background-repeat: repeat-x;
+	border-color: #245580;
+	color: white;
+}
+
+.navbar-toggler:not(.collapsed){ background: linear-gradient(to bottom, #00528c 0%,#3a75c7 100%); }
+
+form.searchfield{
+	position: relative;
+}
+
+form.searchfield .button{
+	position: absolute;
+	top: 3px;
+	right: 11px;
+	padding: 0 6px;
+	border: 0;
+}
+
+.login.button{
+	padding: 0 10px;
+}
+
+
+/* ----------------------------------------------- Main ----------------------------------------------- */
+
+main{
+	margin: 90px 0 70px 0;
+}
+
+
+/* ----------------------------------------------- LoginPage ----------------------------------------------- */
+body.Anmelden{
+	background: #eee !important;
+}
+
+body.Anmelden form#MemberLoginForm_LoginForm {
+	max-width: 380px;
+	padding: 15px 35px 45px;
+	margin: 0 auto;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.Anmelden #MemberLoginForm_LoginForm_Remember_Holder{
+	margin: 15px 0;
+}
+
+body.Anmelden #MemberLoginForm_LoginForm_Email_Holder, 
+body.Anmelden #MemberLoginForm_LoginForm_Password_Holder{ position: relative; }
+
+body.Anmelden #MemberLoginForm_LoginForm_Password_Holder label{
+	position: absolute;
+	top: 40px;
+}
+
+body.Anmelden #MemberLoginForm_LoginForm input{
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+	display: block;
+	width: 100%;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+body.Anmelden #MemberLoginForm_LoginForm input[type="text"] {
+	margin-bottom: -1px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+body.Anmelden #MemberLoginForm_LoginForm input[type="password"] {
+	margin-bottom: 20px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+
+/* ----------------------------------------------- Footer ----------------------------------------------- */
+footer{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	text-align: center;
+	font-size: 12px;
+	background-color: #ddd;
+	padding: 10px;
+}
