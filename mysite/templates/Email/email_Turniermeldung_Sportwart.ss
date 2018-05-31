@@ -53,7 +53,7 @@
 						<div style="display: inline-block; margin: 0 50px 0 0;">
 							Name:<br>
 							<div style="margin-left: 30px">
-								<b>$FirstName - $LastName</b>
+								<b>$Fullname</b>
 							</div>
 							Datum:<br>
 							<div style="margin-left: 30px">

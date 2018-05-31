@@ -9,6 +9,7 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\Forms\ConfirmedPasswordField;
 use SilverStripe\Security\Security;
 use SilverStripe\Security\Member;
@@ -57,8 +58,6 @@ class ProfilEditPageController extends PageController{
 				}
 
 				$this->loadUserData($selectedMember);	
-
-				//$this->dancePartnerName = $user->dancePartnerID;
 			}
 
 		}elseif ( $user = Security::getCurrentUser() ) {
@@ -68,8 +67,6 @@ class ProfilEditPageController extends PageController{
 			}
 
 			$this->loadUserData($user);	
-
-			$this->dancePartnerName = $user->dancePartnerID;
 		}
 
 		$isInCommittee = $this->isInCommittee();
@@ -86,7 +83,7 @@ class ProfilEditPageController extends PageController{
 				TextField::create('Email', 'Email')->setValue($this->userEmail),
 				TextField::create('hobbies', 'Hobbies')->setValue($this->hobbies),
 				TextField::create('danceSince', 'tanzt seit')->setValue($this->danceSince),
-				DropdownField::create('dancePartnerID', 'Tanzpartner', $Members, $this->dancePartnerName),
+				ReadonlyField::create('dancePartnerID', 'Tanzpartner')->setValue($this->dancePartnerName),
 				TextField::create('danceTogetherSince', 'tanzen zusammen seit')->setValue($this->danceTogetherSince),
 				TextField::create('favDances', 'Lieblingstänze')->setValue($this->favDances),
 				TextField::create('danceGroup', 'Gruppe')->setValue($this->danceGroup),
@@ -116,38 +113,52 @@ class ProfilEditPageController extends PageController{
 
 		return $editForm;
 	}
+	
+	private function getPartner()
+	{
+		if( $user = Security::getCurrentUser() ) {
+			if($dancePartnerID = $user->dancePartnerID){
+				return Member::get()->filter(['ID' => $dancePartnerID])->First();	
+			}
+		}
+	}
+
 
 	public function EditUser($data, $form){
 		if($data['profilImage']){
 			$file = $data['profilImage'];
-			$content = file_get_contents($file['tmp_name']);
+			if($file['error'] == 0){
+				$content = file_get_contents($file['tmp_name']);
+			}
 		}
 
 		if( $user = Security::getCurrentUser() ) {
 
 			$form->saveInto($user);
 
-			if($user->DanceProfilID){
-				$profil = $user->DanceProfil();
-				$form->saveInto($profil);
-				$profil->write();
-			}else{
-				$profil = new DanceProfil();
-				$form->saveInto($profil);
-				$profil->write();
-				$user->DanceProfilID = $profil->ID;
-			}
-
-			$user->write();
-
-			if($MemberID = $data['dancePartnerID']){
-				if($currentPartner = Member::get()->filter(['ID' => $MemberID])->First()){
-					$currentPartner->dancePartnerID = $user->ID;
-					$currentPartner->DanceProfilID = $profil->ID;
-
-					$currentPartner->write();
+			if($dancePartner = $this->getPartner()){
+				if($user->DanceProfilID == $dancePartner->DanceProfilID &&
+					$user->DanceProfilID != 0){
+					$danceProfilID = $user->DanceProfilID;
+					$danceProfil = DanceProfil::get()->filter(['ID' => $danceProfilID])->First();
+					$form->saveInto($danceProfil);
+					$danceProfil->write();
+				}else{
+					$danceProfil = new DanceProfil;
+					$form->saveInto($danceProfil);
+					$danceProfil->write();
+					
+					$user->DanceProfilID = $danceProfil->ID;
+					
+					$dancePartner->DanceProfilID = $danceProfil->ID;
+					$dancePartner->write();
 				}
+				
+				
+				
 			}
+			
+			$user->write();
 
 			$form->sessionMessage('Erfolgreich gespeichert', 'success');
 			$this->redirect("/profil-edit");
@@ -175,7 +186,7 @@ class ProfilEditPageController extends PageController{
 		$this->profilActive			= $user->profilActive;
 		$this->profilImageX			= $user->profilImageX;
 		$this->profilImageY			= $user->profilImageY;
-		$this->dancePartnerName		= $user->dancePartnerID;
+		$this->dancePartnerName		= $this->getPartner()->fullName;
 	}
 
 	private function loadDanceProfilData($profil){

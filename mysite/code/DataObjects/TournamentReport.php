@@ -85,13 +85,14 @@ class TournamentReport extends DataObject{
 	];
 
 	function IsOurEntry() {
-		$member = Security::getCurrentUser()->ID;
-		$PartnerEmail = Security::getCurrentUser()->Tanzpartner;
-		$Partner = DataObject::get_one("Member", "Email = '$PartnerEmail'");
+		$currentUser = Security::getCurrentUser();
+		$dancePartnerID = $currentUser->dancePartnerID;
+		//$Partner = DataObject::get_one("Member", "ID = '$dancePartnerID'");
 
-		return ($member == $this->AuthorID || $Partner->ID == $this->AuthorID);
+		//return ($currentUser == $this->AuthorID || $Partner->ID == $this->AuthorID);
+		return $currentUser == $this->AuthorID;
 	}
-
+	
 	//Fields for the DOM Popup
 	public function getCMSFields()
 	{
@@ -188,14 +189,15 @@ class TournamentReport extends DataObject{
 	private function sendReportCreate(){
 		$currentMember = Security::getCurrentUser();
 		$from = "noreply@tsg-nordhorn.de";
-		//$to = $currentMember->Email;
-		$to = "bereusei@gmail.com";
-		$subject = "TSG Website";
+		$to = $currentMember->Email;
+		//$to = "bereusei@gmail.com";
+		$ausrichter = $this->Ausrichter;
+		$subject = "Meldung $ausrichter";
 		$firstName = $currentMember->FirstName ? $currentMember->FirstName : "";
+		$fullName = $currentMember->fullName ? $currentMember->fullName : "";
 		$date = $this->Datum;
 		$time = $this->Uhrzeit;
 		$turniernummer = $this->Turniernummer;
-		$ausrichter = $this->Ausrichter;
 		$type = $this->Startgruppe . " " . $this->Klasse . " " . $this->Type;
 
 		//Email User
@@ -218,8 +220,7 @@ class TournamentReport extends DataObject{
 		$email_sportwart = Email::create()
 			->setHTMLTemplate('Email\email_Turniermeldung_Sportwart')
 			->setData([
-				'FirstName'		=> $firstName,
-				'LastName'		=> $lastName,
+				'Fullname'		=> $fullName,
 				'Date'			=> $date,
 				'Time' 			=> $time,
 				'Turniernummer' => $turniernummer,
@@ -228,21 +229,24 @@ class TournamentReport extends DataObject{
 			])
 			->setFrom($from)
 			->setTo("sportwart@tsg-nordhorn.de")
-			->setSubject($subject);
+			//->setTo("bereusei@gmail.com")
+			->setSubject($subject . " - " . $fullName);
 		$email_sportwart->send();
 	}
 
 	public function sendReportUpdate(){
-		$currentMember = Security::getCurrentUser();
+		$authorId = $this->AuthorID;
+		$author = Member::get()->filter(['ID' => $authorId])->First();
 		$from = "noreply@tsg-nordhorn.de";
-		//$to = $currentMember->Email;
-		$to = "bereusei@gmail.com";
-		$subject = "TSG Website";
-		$firstName = $currentMember->FirstName ? $currentMember->FirstName : "";
+		$to = $author->Email;
+		//$to = "bereusei@gmail.com";
+		$ausrichter = $this->Ausrichter ? $this->Ausrichter : "";
+		$subject = "Status Update: Turnier $ausrichter";
+		$firstName = $author->FirstName ? $author->FirstName : "";
+		//$firstName = $author->Email;
 		$date = $this->Datum ? $this->Datum : "";
 		$time = $this->Uhrzeit ? $this->Uhrzeit : "";
 		$turniernummer = $this->Turniernummer ? $this->Turniernummer : "";
-		$ausrichter = $this->Ausrichter ? $this->Ausrichter : "";
 		$type = $this->Type ? $this->Startgruppe . " " . $this->Klasse . " " . $this->Type : "";
 		$status = $this->Status ? $this->Status : "";
 

@@ -17,7 +17,8 @@
 		<% end_if %>
 
 		<transition name="fade" style="width: 100%">
-			<div class="form-area col-md-12" v-if="show">
+			<!--TODO: v-if="show" bugfix IE und Firefox -->
+			<div class="form-area col-md-12">
 				$TournamentForm
 			</div>
 		</transition>
@@ -39,7 +40,7 @@
 			</thead>
 			<tbody>
 				<% loop $getReports %>
-					<tr id="$ID" <% if $isReportLibrary %><% else_if $isOld %>class="expired"<% end_if %> >
+					<tr id="$ID" <% if $isReportLibrary %><% else_if $isOld %>class="expired"<% end_if %> <% if isOurEntry %>class="isOurEntry"<% end_if %>>
 						<td>$Datum.Nice</td>
 						<td>$Uhrzeit</td>
 						<td>$Turniernummer</td>

@@ -21,6 +21,7 @@ use SilverStripe\View\ArrayData;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Assets\File;
+use SilverStripe\Security\Member;
 
 class ReportListPage extends Page{
 
@@ -104,6 +105,7 @@ class ReportListPage_Controller extends PageController{
 	public function sendTournamentReport($data, $form){
 		$report = TournamentReport::create();
 		$report->ReportListPageID = $this->ID;
+		$report->Tanzpartner = $this->getPartner()->fullName;
 		$form->saveInto($report);
 		$report->write();
 
@@ -132,6 +134,15 @@ class ReportListPage_Controller extends PageController{
 
 	public function showReportLibrary(){
 		return $this->redirect('meldeliste?show=reportLibrary');
+	}
+
+	private function getPartner()
+	{
+		if( $user = Security::getCurrentUser() ) {
+			if($dancePartnerID = $user->dancePartnerID){
+				return Member::get()->filter(['ID' => $dancePartnerID])->First();	
+			}
+		}
 	}
 
 	protected function init()

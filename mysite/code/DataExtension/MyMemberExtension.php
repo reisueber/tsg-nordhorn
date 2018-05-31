@@ -47,6 +47,8 @@ class MyMemberExtension extends DataExtension{
 		'Images'				=> Image::class,
 		'Tournaments'			=> TournamentReport::class
 	];
+	
+	private $unsaved_relation_DanceProfil;
 
 	public function getFullName(){
 		return $this->owner->FirstName . " " . $this->owner->Surname;
@@ -131,8 +133,7 @@ class MyMemberExtension extends DataExtension{
 	public function updateCMSFields(FieldList $fields)
     {
         $Members = Member::get()->map('ID', 'FullName');
-
-        $fields->removeByName('DanceProfilID');
+        $danceProfils = DanceProfil::get()->map('ID', 'Partners');
 
         $danceTogetherSinceValue = $this->owner->DanceProfil()->danceTogetherSince;
 
@@ -144,6 +145,7 @@ class MyMemberExtension extends DataExtension{
 			CheckboxField::create('isInactive', 'ist inaktives Tanzpaar'),
 			CheckboxField::create('profilActive', 'Profil ist aktiv'),
 			TextField::create('myDanceTogetherSince', 'tanzen seit zusammen')->setValue($danceTogetherSinceValue),
+			DropdownField::create('DanceProfilID', 'Tanzprofil', $danceProfils)
         ));
 
         $fields->addFieldsToTab('Root.Vorstand', array (
@@ -155,15 +157,7 @@ class MyMemberExtension extends DataExtension{
 
 	public function onBeforeWrite()
     {		
-    		//set dancePartnerID
-			if($dancePartner = $this->getPartner()){
-				if($dancePartner->DanceProfilID != $this->owner->DanceProfilID){
-					$dancePartner->DanceProfilID = $this->owner->DanceProfilID;
-					$dancePartner->write();
-				}
-			}
-
-			//publish profilImage
+    		//publish profilImage
             if($this->owner->profilImage() && $this->owner->profilImage()->exists()) {
                 $this->owner->profilImage()->publishSingle();
             }
