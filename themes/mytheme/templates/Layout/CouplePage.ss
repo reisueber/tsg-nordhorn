@@ -1,6 +1,6 @@
 <% with $getSelectedMember %>
 	<div class="controller">
-		<a href="/profil-edit?id=$ID" class="button button-pill back">bearbeiten</a>
+		<% if $isAdmin %><a href="/profil-edit?id=$ID" class="button button-pill back">bearbeiten</a><% end_if %>
 		<a href="javascript: history.back()" class="button button-pill back">zurück</a>
 	</div>
 

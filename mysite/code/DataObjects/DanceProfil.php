@@ -7,6 +7,8 @@ use SilverStripe\Security\Member;
 class DanceProfil extends DataObject{
 
 	private static $db = [
+		'ID_partner1'			=> 'Varchar(5)',
+		'ID_partner2'			=> 'Varchar(5)',
 		'danceTogetherSince'	=> 'Varchar(255)',
 		'danceGroup'			=> 'Varchar(255)',
 		'danceClass'			=> 'Varchar(255)',
@@ -19,7 +21,7 @@ class DanceProfil extends DataObject{
 	];
 
 	private static $has_many = [
-		'Members'				=> 	Members::class
+		'Members'				=> 	Member::class
 	];
 	
 	public function getPartners(){

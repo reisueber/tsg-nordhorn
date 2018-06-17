@@ -4,7 +4,7 @@
 			<h1>News</h1>
 			<table class="table table-hover table-striped">
 				<tbody>
-					<% loop $getStartPageNews %>
+					<% loop $getStartPageNews.Sort(Date, DESC) %>
 					<tr class='clickable-row' data-href='$Link'>
 						<td>$MainImage.fit(100,100)</td>
 						<td>

@@ -11,6 +11,9 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\View\Requirements;
+use SilverStripe\Security\Security;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Group;
 
 class ReportEditPage extends Page{
 
@@ -30,7 +33,9 @@ class ReportEditPageController extends PageController{
 		}else{
 			$foundReport = false;
 		}
-
+		
+		$readonly = !$this->isSportwart();
+		
 		$myDatum = $foundReport ? $currentReport->Datum : "";
 		$myUhrzeit = $foundReport ? $currentReport->Uhrzeit : "";
 		$myTurniernummer = $foundReport ? $currentReport->Turniernummer : "";
@@ -42,20 +47,8 @@ class ReportEditPageController extends PageController{
 		$myStatus = $foundReport ? $currentReport->Status : "";
 		$platzierung = $foundReport ? $currentReport->Platzierung : "";
 		$gesamtPlatzierung = $foundReport ? $currentReport->Gesamtplatzierungen : "";
-
-		$editForm = Form::create(
-			$this,
-			'EditForm',
-			FieldList::create(
-				HiddenField::create('ReportId', 'ReportId')->setValue($id),
-				DateField::create('Datum', 'Datum')->addExtraClass('col-md-4')->setValue($myDatum),
-				TimeField::create('Uhrzeit', 'Uhrzeit')->addExtraClass('col-md-4')->setValue($myUhrzeit),
-				NumericField::create('Turniernummer', 'Turniernummer')->addExtraClass('col-md-4')->setValue($myTurniernummer),
-				TextField::create('Ausrichter', 'Ausrichter')->addExtraClass('col-md-4')->setValue($myAusrichter),
-				TextField::create('Startgruppe', 'Gruppe')->addExtraClass('col-md-4')->setValue($myStartgruppe),
-				TextField::create('Klasse', 'Klasse')->addExtraClass('col-md-4')->setValue($myKlasse),
-				CheckboxField::create('Standard', 'Standard')->setValue($myStandard),
-				CheckboxField::create('Latein', 'Latein')->setValue($myLatein),
+		
+		$StatusField = $this->isSportwart() ? 
 				DropdownField::create('Status', 'Status', array(
 					'Meldung erhalten' 				=> 'Meldung erhalten',
 					'Auslandsgenehmigung beantragt'	=> 'Auslandsgenehmigung beantragt',
@@ -63,9 +56,32 @@ class ReportEditPageController extends PageController{
 					'Paar abgemeldet' 				=> 'Paar abgemeldet',
 					'Turnier abgesagt' 				=> 'Turnier abgesagt',
 					'Meldung abgelehnt'				=> 'Meldung abgelehnt'
-				))->setValue($myStatus),
-				TextField::create('Platzierung', 'Platzierung')->setValue($platzierung),
-				TextField::create('Gesamtplatzierungen', 'Gesamtplatzierungen')->setValue($gesamtPlatzierung)
+				))->setValue($myStatus) :
+				HiddenField::create('Status', 'Status')->setValue($myStatus)->setReadonly($readonly);
+		$PlatzierungenField = $this->isSportwart() ?
+				HiddenField::create('Platzierung', 'Platzierung') :
+				TextField::create('Platzierung', 'Platzierung')->setValue($platzierung);
+		$Gesamtplatzierungen = $this->isSportwart() ?
+				HiddenField::create('Gesamtplatzierungen', 'Gesamtplatzierungen') :
+				TextField::create('Gesamtplatzierungen', 'Gesamtplatzierungen')->setValue($gesamtPlatzierung);
+		
+		$editForm = Form::create(
+			$this,
+			'EditForm',
+			FieldList::create(
+				HiddenField::create('ReportId', 'ReportId')->setValue($id),
+				DateField::create('Datum', 'Datum')->addExtraClass('col-md-4')->setValue($myDatum)->setReadonly($readonly),
+				TimeField::create('Uhrzeit', 'Uhrzeit')->addExtraClass('col-md-4')->setValue($myUhrzeit)->setReadonly($readonly),
+				NumericField::create('Turniernummer', 'Turniernummer')->addExtraClass('col-md-4')->setValue($myTurniernummer)->setReadonly($readonly),
+				TextField::create('Ausrichter', 'Ausrichter')->addExtraClass('col-md-4')->setValue($myAusrichter)->setReadonly($readonly),
+				TextField::create('Startgruppe', 'Gruppe')->addExtraClass('col-md-4')->setValue($myStartgruppe)->setReadonly($readonly),
+				TextField::create('Klasse', 'Klasse')->addExtraClass('col-md-4')->setValue($myKlasse)->setReadonly($readonly),
+				CheckboxField::create('Standard', 'Standard')->setValue($myStandard)->setReadonly($readonly),
+				CheckboxField::create('Latein', 'Latein')->setValue($myLatein)->setReadonly($readonly),
+				HiddenField::create('Type', 'Type'),
+				$StatusField,
+				$PlatzierungenField,
+				$Gesamtplatzierungen
 			),
 			FieldList::create(
 				FormAction::create('EditReport','Änderungen speichern')
@@ -87,6 +103,11 @@ class ReportEditPageController extends PageController{
 			die("Konnte Report nicht finden");
 		}
 	}
+	
+	public function isSportwart(){
+		return Security::getCurrentUser()->inGroup('Sportwart');
+    }
+
 
 	protected function init()
 	{

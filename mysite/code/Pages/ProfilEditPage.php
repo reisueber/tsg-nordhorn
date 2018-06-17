@@ -136,6 +136,7 @@ class ProfilEditPageController extends PageController{
 
 			$form->saveInto($user);
 
+			//TODO: create or save profil-function in DanceProfil
 			if($dancePartner = $this->getPartner()){
 				if($user->DanceProfilID == $dancePartner->DanceProfilID &&
 					$user->DanceProfilID != 0){
@@ -153,9 +154,7 @@ class ProfilEditPageController extends PageController{
 					$dancePartner->DanceProfilID = $danceProfil->ID;
 					$dancePartner->write();
 				}
-				
-				
-				
+
 			}
 			
 			$user->write();

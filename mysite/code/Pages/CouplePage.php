@@ -10,6 +10,10 @@ class CouplePage extends Page{
 		return Member::get()->filter(['ID' => $MemberID])->First();
 	}
 
+	public function isAdmin(){
+		return Security::getCurrentUser()->inGroup('Administratoren');
+    }
+
 }
 
 

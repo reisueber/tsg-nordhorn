@@ -9,19 +9,10 @@ use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\TimeField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\FieldGroup;
-use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Core\Injector;
-use SilverStripe\Forms\HiddenField;
-use SilverStripe\Forms\TextareaField;
 use SilverStripe\Security\Security;
-use SilverStripe\View\ArrayData;
-use SilverStripe\AssetAdmin\Forms\UploadField;
-use SilverStripe\Assets\Image;
-use SilverStripe\Assets\File;
 use SilverStripe\Security\Member;
+use SilverStripe\Security\Group;
 
 class ReportListPage extends Page{
 
@@ -71,10 +62,12 @@ class ReportListPage_Controller extends PageController{
 				TextField::create('Ausrichter', 'Ausrichter'),
 
 				DropdownField::create('Startgruppe', 'Startgruppe', array(
-					'HGR' 		=> 'HGR',
+					'JUG'       => 'JUG',
+				    'HGR' 		=> 'HGR',
 					'HGR II' 	=> 'HGR II',
 					'SEN I' 	=> 'SEN I',
-					'SEN II' 	=> 'SEN II'
+					'SEN II' 	=> 'SEN II',
+                    'SEN III'   => 'SEN III'
 				)),
 				//->setTemplate("MyDropDownField"),
 				DropdownField::create('Klasse', 'Klasse', array(
@@ -144,6 +137,10 @@ class ReportListPage_Controller extends PageController{
 			}
 		}
 	}
+
+    public function isSportwart(){
+		return Security::getCurrentUser()->inGroup('Sportwart');
+    }
 
 	protected function init()
 	{

@@ -1,8 +1,9 @@
 td.day, td.dow{ font-size: 12px; }
 
 /*.table-striped tbody tr:nth-of-type(odd){ background: rgba(91,164,255,.05); }*/
-tr.selected{ background: #e7f7ff !important; }
+tr.selected{ background: #e7ecff !important; }
 tr.expired{ background: rgba(0,0,0,.02) !important; color: #ddd; }
+tr.isOurEntry{ background: #e7f7ff; }
 
 input{ width: 100%; }
 

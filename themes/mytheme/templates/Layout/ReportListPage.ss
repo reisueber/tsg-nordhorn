@@ -40,7 +40,7 @@
 			</thead>
 			<tbody>
 				<% loop $getReports %>
-					<tr id="$ID" <% if $isReportLibrary %><% else_if $isOld %>class="expired"<% end_if %> <% if isOurEntry %>class="isOurEntry"<% end_if %>>
+					<tr id="$ID" data-foo="$foo" class="<% if $isReportLibrary %><% else_if $isOld %>expired<% end_if %><% if $isOurEntry %> isOurEntry<% end_if %>">
 						<td>$Datum.Nice</td>
 						<td>$Uhrzeit</td>
 						<td>$Turniernummer</td>
@@ -48,11 +48,15 @@
 						<td>$TournamentType</td>
 						<td><span class="status-tag $StatusTagColor">$Status</span></td>
 						<td>$Author.Name</td>
-						<td><a href="edit-page?id=$ID"><i class="md-icon">create</i></a></td>
+						<% if $Up.isSportwart %>
+							<td><a href="edit-page?id=$ID"><i class="md-icon">create</i></a></td>
+						<% end_if %>
 					</tr>
 				<% end_loop %>
 			</tbody>
 		</table>
+
+		<% if $isSportwart %>
 		<div class="controls">
 			<button class="button button-pill button-small">Meldung erhalten</button>
 			<button class="button button-pill button-small">Auslandsgenehmigung beantragt</button>
@@ -61,6 +65,7 @@
 			<button class="button button-pill button-small">Turnier abgesagt</button>
 			<button class="button button-pill button-small">Meldung abgelehnt</button>
 		</div>
+		<% end_if %>
 	</div>
 
 	<div class="row">

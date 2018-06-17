@@ -84,13 +84,19 @@ class TournamentReport extends DataObject{
 		Versioned::class
 	];
 
-	function IsOurEntry() {
+	public function IsOurEntry() {
 		$currentUser = Security::getCurrentUser();
 		$dancePartnerID = $currentUser->dancePartnerID;
-		//$Partner = DataObject::get_one("Member", "ID = '$dancePartnerID'");
+		if($Partner = Member::get()->filter(['ID' => $dancePartnerID])->First()){
+			return ($currentUser->ID == $this->AuthorID || $Partner->ID == $this->AuthorID);
+		};
 
-		//return ($currentUser == $this->AuthorID || $Partner->ID == $this->AuthorID);
-		return $currentUser == $this->AuthorID;
+		return $currentUser->ID == $this->AuthorID;
+	}
+	
+	public function foo(){
+		$currentUser = Security::getCurrentUser();
+		return $this->AuthorID;
 	}
 	
 	//Fields for the DOM Popup

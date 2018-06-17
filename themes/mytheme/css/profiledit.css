@@ -11,6 +11,11 @@ label{
 	flex-basis: 100px;
 }
 
+input[readonly=readonly]{
+	background: #eee;
+	color: #848484;
+}
+
 @media (max-width: 730px){
 	label{ flex-basis: 200px; }
 }

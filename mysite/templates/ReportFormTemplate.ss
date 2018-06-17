@@ -55,7 +55,7 @@
 		<div class="profil-group">
 			<div class="profil-item">
 				<label>Typ</label>
-				$Fields.dataFieldByName(Type)
+				$Fields.dataFieldByName(TournamentType)
 			</div>
 		</div>
 
