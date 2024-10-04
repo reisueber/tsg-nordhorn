@@ -24,6 +24,7 @@
 					<div class="el-tabs__header is-top">
 						<div class="el-tabs__nav-wrap is-top">
 							<div class="el-tabs__nav-scroll">
+							<%-- TABS --%>
 								<div role="tablist" class="el-tabs__nav" style="transform: translateX(0px);">
 									<div class="el-tabs__item is-top" v-on:click="clickTab0" v-bind:class="{ active: tab0IsActive }">
 										Allgemein
@@ -37,7 +38,10 @@
 										<% end_with %>
 									</div>
 									<div class="el-tabs__item is-top" v-on:click="clickTab2" v-bind:class="{ active: tab2IsActive }">	
-										Turniere
+										Aktuelle Turniere
+									</div>
+									<div class="el-tabs__item is-top" v-on:click="clickTab3" v-bind:class="{ active: tab3IsActive }">
+										Vergangene Turniere
 										<div class="badge">
 											<% with $CurrentUser %>
 												$numberOfIncompleteTournaments
@@ -46,7 +50,7 @@
 									</div>
 									<% with $CurrentUser %>
 										<% if $isInCommittee %>
-											<div class="el-tabs__item is-top" v-on:click="clickTab3" v-bind:class="{ active: tab3IsActive }">
+											<div class="el-tabs__item is-top" v-on:click="clickTab4" v-bind:class="{ active: tab4IsActive }">
 												Vorstand
 											</div>
 										<% end_if %>
@@ -56,6 +60,7 @@
 						</div>
 					</div>
 					<div class="el-tabs__content">
+						<%-- Allgemeine Daten --%>
 						<section class="el-tab-pane" v-bind:class="{ active: tab0IsActive }" v-cloak>
 							<div class="profil-group">
 								<div class="profil-item">
@@ -77,16 +82,16 @@
 									<a href="Security/lostpassword" class="button button-pill">Passwort ändern</a>
 								</div>
 							</div>
-						</section>
-						<section class="el-tab-pane" v-bind:class="{ active: tab1IsActive }" v-cloak>
 							<div class="profil-group">
 								<div class="profil-item">
-									<label>Profil aktiv:</label>
-									$Fields.dataFieldByName(profilActive)
-									&nbsp;&nbsp;&nbsp;<span style="font-size: 11px; font-style: italic">(das Tanzprofil wird unter "Unsere Paare" freigeschaltet)</span>
+									<a class="button button-pill" href="profil-edit/mailLink">
+										<i class="fa fa-envelope"></i>&nbsp;&nbsp;Problem melden
+									</a>
 								</div>
 							</div>
-
+						</section>
+						<%-- Tanzprofil --%>
+						<section class="el-tab-pane" v-bind:class="{ active: tab1IsActive }" v-cloak>
 							<div class="profil-group">
 								<div class="profil-item">
 									<label>Profilbild:</label>
@@ -175,6 +180,7 @@
 								</div>
 							</div>
 						</section>
+						<%-- Aktuelle Turniere --%>
 						<section class="el-tab-pane" v-bind:class="{ active: tab2IsActive }" v-cloak>
 							<div class="tournaments">
 								<h2>Turniere</h2>
@@ -182,20 +188,20 @@
 									<% with $CurrentUser %>
 										<div class="profil-item striped">
 											<section class="col-md-12">
-											<% loop Tournaments %>
-												<div class="item row col-md-12">
-													<div class="col-md-2">$Datum.Nice</div>
-													<div class="col-md-3">$Ausrichter</div>
-													<div class="col-md-3">$Startgruppe $Klasse $Type</div>
-													<div class="col-md-3">$Platzierung von $Gesamtplatzierungen</div>
-													<div class="col-md-1">
-														<a href="edit-page?id=$ID"><i class="fa fa-edit"></i></a>
-														<% if $Platzierung %><% else %>
-															<div class="badge"><i class="fa fa-exclamation"></i></div>
-														<% end_if %>
-													</div>
-												</div>
-											<% end_loop %>
+												<% loop $Tournaments.Filter('Status:Not', 'Turnier löschen') %>
+													<% if not $isOld %>
+														<div class="item row col-md-12">
+															<div class="col-md-2">$Datum.Nice</div>
+															<div class="col-md-2">$Uhrzeit</div>
+															<div class="col-md-3">$Ausrichter</div>
+															<div class="col-md-2">$Startgruppe $Klasse $Type</div>
+															<div class="col-md-2">$Status</div>
+															<div class="col-md-1">
+																<a href="edit-page?id=$ID"><i class="fa fa-trash-alt"></i></a>
+															</div>
+														</div>
+													<% end_if %>
+												<% end_loop %>
 											</section>
 										</div>
 										
@@ -203,23 +209,58 @@
 								</div>
 							</div>
 						</section>
+						<%-- Vergangene Turniere --%>
 						<section class="el-tab-pane" v-bind:class="{ active: tab3IsActive }" v-cloak>
-							<% if $isInCommittee %>
-								<h2>Vorstand:</h2>
+							<div class="tournaments">
+								<h2>Turniere</h2>
 								<div class="profil-group">
-									<div class="profil-item">
-										<label>Stelle:</label>
-										$Fields.dataFieldByName(committeePosition)
-									</div>
-								</div>
+									<% with $CurrentUser %>
+										<div class="profil-item striped">
+											<section class="col-md-12">
+												<% loop Tournaments.Sort(Datum, DESC) %>
+													<% if $isOld %>
+														<div class="item row col-md-12">
+															<div class="col-md-2">$Datum.Nice</div>
+															<div class="col-md-3">$Ausrichter</div>
+															<div class="col-md-3">$Startgruppe $Klasse $Type</div>
+															<div class="col-md-3">$Platzierung von $Gesamtplatzierungen</div>
+															<div class="col-md-1">
+																<a href="edit-page?id=$ID"><i class="fa fa-edit"></i></a>
+																<% if $Platzierung %><% else %>
+																	<div class="badge"><i class="fa fa-exclamation"></i></div>
+																<% end_if %>
+															</div>
+														</div>
+													<% end_if %>
+												<% end_loop %>
+											</section>
+										</div>
 
-								<div class="profil-group">
-									<div class="profil-item">
-										<label>Beschreibung Vorstand:</label>
-										$Fields.dataFieldByName(committeeDescription)
-									</div>
+									<% end_with %>
 								</div>
-							<% end_if %>
+							</div>
+						</section>
+						<%-- Vorstand --%>
+						<section class="el-tab-pane" v-bind:class="{ active: tab4IsActive }" v-cloak>
+							<h2>Vorstand:</h2>
+							<div class="profil-group">
+								<div class="profil-item">
+									<label>Stelle:</label>
+									$Fields.dataFieldByName(committeePosition)
+								</div>
+							</div>
+							<div class="profil-group">
+								<div class="profil-item">
+									<label>E-Mail im Vorstand:</label>
+									$Fields.dataFieldByName(committeeEmail)
+								</div>
+							</div>
+							<div class="profil-group">
+								<div class="profil-item">
+									<label>Beschreibung Vorstand:</label>
+									$Fields.dataFieldByName(committeeDescription)
+								</div>
+							</div>
 						</section>
 					</div>
 				</div>

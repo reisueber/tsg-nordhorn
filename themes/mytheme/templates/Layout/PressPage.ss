@@ -15,19 +15,19 @@
 			  <hr>
           <% end_if %>
 
-          <!-- Preview Image -->
-          <div class="main-image">
+          <!-- Preview Image TODO: Bugfix-->
             <% if $MainImage %>
-                
-                <div class="image-wrapper" id="mainImageWrapper"
-                  <% if $MainImageY %>style="top: {$MainImageY}px; left: {$MainImageX}px;"<% end_if %>>
+                <!-- <div class="main-image">
+
+                 <div class="image-wrapper" id="mainImageWrapper"
+                      <% if $MainImageY %>style="top: {$MainImageY}px; left: {$MainImageX}px;"<% end_if %>>
                   
-                    <img id="mainImage" src="$MainImage.Link" />
+                        <img id="mainImage" src="$MainImage.Link" />
                   
-                </div>
+                 </div>
                       
+                </div>-->
             <% end_if %>
-          </div>
 
           <!-- Post Content -->
           $Content

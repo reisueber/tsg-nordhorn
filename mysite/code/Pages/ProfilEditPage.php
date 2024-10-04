@@ -30,6 +30,7 @@ class ProfilEditPageController extends PageController{
 	private $danceSince;
 	private $favDances;
 	private $committeePosition;
+	private $committeeEmail;
 	private $committeeDescription;
 	private $profilActive;
 	private $profilImageX;
@@ -46,7 +47,8 @@ class ProfilEditPageController extends PageController{
 
 	private static $allowed_actions = [
 		'EditForm',
-		'EditUser'
+		'EditUser',
+        'mailLink'
 	];
 
 	public function EditForm(){
@@ -91,6 +93,7 @@ class ProfilEditPageController extends PageController{
 				TextareaField::create('successes', 'Erfolge')->setValue($this->successes),
 				TextareaField::create('description', 'Ein paar kurze Worte')->setValue($this->description),
 				TextField::create('committeePosition', 'Stellung:')->setValue($this->committeePosition),
+				TextField::create('committeeEmail', 'E-Mail im Vorstand'),
 				TextareaField::create('committeeDescription', 'Text Vorstand')->setValue($this->committeeDescription),
 				FileField::create('profilImage', 'Profilbild'),
 				HiddenField::create('profilImageX', 'X')->setValue($this->profilImageX),
@@ -98,8 +101,7 @@ class ProfilEditPageController extends PageController{
 				FileField::create('danceProfilImage', 'Tanzpaarbild'),
 				HiddenField::create('danceProfilImageX', 'X')->setValue($this->danceProfilImageX),
 				HiddenField::create('danceProfilImageY', 'Y')->setValue($this->danceProfilImageY),
-				FileField::create('Images', 'Images'),
-				CheckboxField::create('profilActive', 'Profil aktiv')->setValue($this->profilActive)->setTemplate('MyCheckboxSlider')
+				FileField::create('Images', 'Images')
 			),
 			FieldList::create(
 				FormAction::create('EditUser','Änderungen speichern')->addExtraClass('button button-pill button-primary')
@@ -123,7 +125,6 @@ class ProfilEditPageController extends PageController{
 		}
 	}
 
-
 	public function EditUser($data, $form){
 		if($data['profilImage']){
 			$file = $data['profilImage'];
@@ -134,7 +135,7 @@ class ProfilEditPageController extends PageController{
 
 		if( $user = Security::getCurrentUser() ) {
 
-			$form->saveInto($user);
+		    $form->saveInto($user);
 
 			//TODO: create or save profil-function in DanceProfil
 			if($dancePartner = $this->getPartner()){
@@ -181,6 +182,7 @@ class ProfilEditPageController extends PageController{
 		$this->danceSince 			= $user->danceSince;
 		$this->favDances 			= $user->favDances;
 		$this->committeePosition	= $user->committeePosition;
+		$this->committeeEmail       = $user->committeePosition;
 		$this->committeeDescription	= $user->committeeDescription;
 		$this->profilActive			= $user->profilActive;
 		$this->profilImageX			= $user->profilImageX;
@@ -197,6 +199,10 @@ class ProfilEditPageController extends PageController{
 		$this->danceProfilImageX	= $profil->danceProfilImageX;
 		$this->danceProfilImageY	= $profil->danceProfilImageY;
 	}
+
+    public function mailLink(){
+        header("Location: mailto:mail@reisueber.eu");
+    }
 
 	protected function init()
 	{

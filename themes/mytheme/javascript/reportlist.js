@@ -5,7 +5,7 @@
 			$(this).toggleClass('selected');
 		} );
 
-		$('.button').on('click', function(){
+		$('.button.action').on('click', function(){
 			$type = $(this).html();
 			$output = "";
 			var selectedFields = $('tr.selected');
@@ -55,6 +55,11 @@ var showReportForm = new Vue({
 	el: '#TournamentForm',
 	data:{
 		show: false
+	},
+	methods:{
+		toggle: function(){
+			this.show = !this.show
+		}
 	}
 })
 

@@ -89,7 +89,7 @@
 				</div>
 			<% end_loop %>
 
-			<div class="item">
+			<!--<div class="item">
 				<h2>Fotos:</h2>
 				<div class="col-md-12 photos row">
 					<div class="photo"></div>
@@ -102,7 +102,7 @@
 					<div class="photo"></div>
 					<div class="photo"></div>
 				</div>
-			</div>
+			</div>-->
 		</section>
 	</div>
 <% end_with %>

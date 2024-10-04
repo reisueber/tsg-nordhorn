@@ -55,13 +55,14 @@ class ReportEditPageController extends PageController{
 					'gemeldet' 						=> 'gemeldet',
 					'Paar abgemeldet' 				=> 'Paar abgemeldet',
 					'Turnier abgesagt' 				=> 'Turnier abgesagt',
-					'Meldung abgelehnt'				=> 'Meldung abgelehnt'
+					'Meldung abgelehnt'				=> 'Meldung abgelehnt',
+                    'Turnier löschen'               => 'Turnier löschen'
 				))->setValue($myStatus) :
 				HiddenField::create('Status', 'Status')->setValue($myStatus)->setReadonly($readonly);
-		$PlatzierungenField = $this->isSportwart() ?
+		$PlatzierungenField = ($this->isSportwart() || !$this->isOld($id)) ?
 				HiddenField::create('Platzierung', 'Platzierung') :
 				TextField::create('Platzierung', 'Platzierung')->setValue($platzierung);
-		$Gesamtplatzierungen = $this->isSportwart() ?
+		$Gesamtplatzierungen = ($this->isSportwart() || !$this->isOld($id)) ?
 				HiddenField::create('Gesamtplatzierungen', 'Gesamtplatzierungen') :
 				TextField::create('Gesamtplatzierungen', 'Gesamtplatzierungen')->setValue($gesamtPlatzierung);
 		
@@ -106,6 +107,12 @@ class ReportEditPageController extends PageController{
 	
 	public function isSportwart(){
 		return Security::getCurrentUser()->inGroup('Sportwart');
+    }
+
+    public function isOld($id) {
+        if(isset($id) && $report = TournamentReport::get()->filter(array( 'ID' => $id ))->first()){
+            return $report->isOld();
+        }
     }
 
 

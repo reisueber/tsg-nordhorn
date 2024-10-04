@@ -34,6 +34,7 @@ class MyMemberExtension extends DataExtension{
 		'isInCommittee'			=> 'Boolean',
 		'isInactive'			=> 'Boolean',
 		'committeePosition'		=> 'Varchar(255)',
+        'committeeEmail'        => 'Varchar(255)',
 		'committeeDescription'	=> 'Text',
 		'dancePartnerID'		=> 'Int',
 		'profilActive'			=> 'Boolean',
@@ -177,6 +178,7 @@ class MyMemberExtension extends DataExtension{
         $fields->addFieldsToTab('Root.Vorstand', array (
             CheckboxField::create('isInCommittee', 'ist im Vorstand'),
 			TextField::create('committeePosition', 'Position im Vorstand'),
+			TextField::create('committeeEmail', 'E-Mail im Vorstand'),
 			TextareaField::create('committeeDescription', 'Beschreibung'),
         ));
     }
@@ -302,7 +304,7 @@ class MyMemberExtension extends DataExtension{
 
             //send E-Mail
             if(!$this->owner->ID){
-            	$from = "pressewart@tsg-nordhorn.de";
+            	$from = "website@tsg-nordhorn.de";
             	$to = $this->owner->Email;
             	$subject = "TSG Website";
             	$firstName = $this->owner->FirstName ? $this->owner->FirstName : "";

@@ -74,32 +74,44 @@ var profilEditForm = new Vue({
 		tab0IsActive: true,
 		tab1IsActive: false,
 		tab2IsActive: false,
-		tab3IsActive: false
+		tab3IsActive: false,
+		tab4IsActive: false
 	},
 	methods:{
 		clickTab0: function(event){
-			this.tab0IsActive = true
-			this.tab1IsActive = false
-			this.tab2IsActive = false
-			this.tab3IsActive = false
+			this.tab0IsActive = true,
+			this.tab1IsActive = false,
+			this.tab2IsActive = false,
+			this.tab3IsActive = false,
+			this.tab4IsActive = false
 		},
 		clickTab1: function(event){
-			this.tab0IsActive = false
-			this.tab1IsActive = true
-			this.tab2IsActive = false
-			this.tab3IsActive = false
+			this.tab0IsActive = false,
+			this.tab1IsActive = true,
+			this.tab2IsActive = false,
+			this.tab3IsActive = false,
+			this.tab4IsActive = false
 		},
 		clickTab2: function(event){
-			this.tab0IsActive = false
-			this.tab1IsActive = false
-			this.tab2IsActive = true
-			this.tab3IsActive = false
+			this.tab0IsActive = false,
+			this.tab1IsActive = false,
+			this.tab2IsActive = true,
+			this.tab3IsActive = false,
+			this.tab4IsActive = false
 		},
 		clickTab3: function(event){
-			this.tab0IsActive = false
-			this.tab1IsActive = false
-			this.tab2IsActive = false
-			this.tab3IsActive = true
+			this.tab0IsActive = false,
+			this.tab1IsActive = false,
+			this.tab2IsActive = false,
+			this.tab3IsActive = true,
+			this.tab4IsActive = false
+		},
+		clickTab4: function(event){
+			this.tab0IsActive = false,
+			this.tab1IsActive = false,
+			this.tab2IsActive = false,
+			this.tab3IsActive = false,
+			this.tab4IsActive = true
 		}
 	}
-})
+});

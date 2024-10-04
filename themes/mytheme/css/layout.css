@@ -22,6 +22,7 @@ a{ color: black; }
 
 [v-cloak] > * { display:none }
 [v-cloak]::before { content: "loading…" }
+.hide{ display: none; }
 
 .img-responsive{
 	width: 100%;

@@ -151,8 +151,12 @@ class TournamentReport extends DataObject{
 		return $type;		
 	}
 
+    private function convertToNewStartgruppe($startgruppe) {
+        return str_replace("SEN", "MASTER", $startgruppe);
+    }
+
 	public function getTournamentType(){
-		return $this->Startgruppe . " " . $this->Klasse . " " . $this->convertOldType();
+		return $this->convertToNewStartgruppe($this->Startgruppe) . " " . $this->Klasse . " " . $this->convertOldType();
 	}
 
 	public function getStatusTagColor(){
@@ -175,6 +179,9 @@ class TournamentReport extends DataObject{
 			case 'Meldung abglehnt':
 				return 'red';
 				break;
+            case 'Vom Paar storniert':
+                return 'red';
+                break;
 			
 			default:
 				# code...
@@ -182,7 +189,7 @@ class TournamentReport extends DataObject{
 		}
 	}
 
-	public function isOld(){
+    public function isOld(){
 		$oneday = strtotime( '-1 days' );
 		$today = date('Y-m-d', $oneday);
 		return $this->Datum < $today;
@@ -194,7 +201,7 @@ class TournamentReport extends DataObject{
 
 	private function sendReportCreate(){
 		$currentMember = Security::getCurrentUser();
-		$from = "noreply@tsg-nordhorn.de";
+		$from = "sportwart@tsg-nordhorn.de";
 		$to = $currentMember->Email;
 		//$to = "bereusei@gmail.com";
 		$ausrichter = $this->Ausrichter;
@@ -235,7 +242,7 @@ class TournamentReport extends DataObject{
 			])
 			->setFrom($from)
 			->setTo("sportwart@tsg-nordhorn.de")
-			//->setTo("bereusei@gmail.com")
+//			->setTo("sascha@reisueber.de")
 			->setSubject($subject . " - " . $fullName);
 		$email_sportwart->send();
 	}
@@ -270,7 +277,7 @@ class TournamentReport extends DataObject{
 			->setFrom($from)
 			->setTo($to)
 			->setSubject($subject);
-		if($this->Status != "in Bearbeitung"){
+		if($this->Status == "gemeldet"){
 			$email->send();
 		}	
 	}

@@ -18,6 +18,7 @@ class PageController extends ContentController
 
 		Requirements::themedJavascript("jquery-3.3.1.min");
 		Requirements::javascript("/themes/mytheme/thirdparty/vue/vue.js");
+//		Requirements::javascript("/themes/mytheme/thirdparty/vue-2.6.10/dist/vue.min.js");
 		Requirements::javascript("https://unpkg.com/popper.js/dist/umd/popper.min.js");
 		Requirements::javascript("/themes/mytheme/thirdparty/bootstrap-4.0.0-dist/js/bootstrap.min.js");
 		Requirements::javascript("/themes/mytheme/thirdparty/buttons/js/buttons.js");

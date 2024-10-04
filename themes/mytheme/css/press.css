@@ -12,3 +12,487 @@
 	height: 300px;
 	overflow: hidden;
 }
+
+/* LM 2022 */
+.nar {
+    font-family: "Avenir Next Condensed","Roboto Condensed","Arial Narrow","Helvetica Narrow",Tahoma,sans-serif;
+    position:relative;
+}
+
+.mainback {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    align: center;
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 20px;
+    margin: 0 auto 0 auto;
+    border-radius: 4px;
+    top:0px;
+    height: auto;
+    min-height: 90vh;
+}
+
+.eventhead {
+    border: 1px solid #A0A0A0;
+    background-color: #E0E0E0;
+    color: #000000;
+    padding: 7px 7px 7px 20px;
+    font-size: 18pt;
+    font-weight: bold;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin: 0 0 10px 0;
+}
+
+.divbox { 
+    overflow-x:auto;
+}
+
+.backbtn {
+    border: 1px solid #808080;
+    background-color: #A0A0A0;
+    border-radius: 4px;
+    color: #FFFFFF;
+    width: 20px;
+    height: 22px;
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 2px 5px 2px 5px;
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+    text-decoration: none;
+ }
+
+.maincontainer {
+    border: 1px solid #F00000;
+    border-radius: 4px;
+    padding: 20px 20px 0 20px;
+    height: auto;
+    min-height: 80vh;
+}
+
+.comphead {
+    color: #F00000;
+    font-size: 15pt;
+}
+
+.line {
+    border: 0;
+    height: 1px;
+    background: #F00000;
+    margin: 15px 0 20px 0;
+}
+
+.erimg {
+    border-radius: 4px;
+    max-width: 100%
+}
+
+.erimgdiv {
+    align: center;
+    width: 400px;
+    height: auto;
+    display: none;
+    margin: 0 auto 10px auto;
+}
+
+.groupheader {
+    color: #FFFFFF;
+    font-size: 11pt;
+    background-color: #F00000;
+    height: 20px;
+    padding: 6px 10px 5px 10px;
+    vertical-align: middle;
+    border: 0px;
+    margin-top: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.groupheader:hover   { background-color: #F08080; }
+
+.expander {
+    font-size: 12pt;
+    font-weight:bold;
+}
+
+.compbutton {
+    color: #FFFFFF;
+    font-size: 11pt;
+    background-color: #F00000;
+    min-height: 20px;
+    padding: 6px 10px 5px 10px;
+    vertical-align: middle;
+    border: 0px;
+    margin-top: 5px;
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.spacebtn {
+    visibility: hidden;
+    min-height:0;
+    max-height:2px;
+    padding:0 10px 0 10px;
+    margin:0;
+    display: inline-block;
+    width: 40%;
+}
+
+.trbox {
+    display: none;
+}
+
+.tdbox {
+    border-left: 1px solid #F00000;
+    border-right: 1px solid #F00000;
+    border-bottom: 1px solid #F00000;
+    border-radius: 0 0 4px 4px;
+    padding: 5px;
+    display: none;
+}
+
+a {
+    color: #F00000;
+    text-decoration: none;
+}
+
+.col1 {
+    width: 40%; display: inline-block; white-space:nowrap;
+}
+
+.t1         {font-size:14pt;
+             font-weight:bold; }
+
+.t2         {font-size:10pt;
+             font-weight:bold;
+             color:#F00000; }
+
+.t3         {font-size:10pt;
+             font-weight:bold; }
+
+.tab1      {
+            margin: 0px;
+            border: 1px #AAAAAA solid;
+            border-collapse: collapse;
+            background-color:#FFFFFF;
+            spacing: 0;
+            position:relative;
+            width:100%; }
+
+.tab2      {
+            margin: 0px;
+            border: 1px #FFFFFF solid;
+            border-collapse: collapse;
+            background-color:#FFFFFF;
+            spacing: 0;
+            position:relative;
+            width:100%; }
+
+.td0       {
+            vertical-align:top;
+            background-color:#AAAAAA;
+            font-size:12pt;
+            font-weight:bold;
+            border: 1px #AAAAAA solid;
+            color:#FFFFFF; }
+
+.td1, .td1c, .tddarkc {
+            vertical-align:top;
+            background-color:#AAAAAA;
+            font-size:11pt;
+            font-weight:bold;
+            border: 1px #AAAAAA solid;
+            padding: 1px 4px 1px 4px;
+            color:#FFFFFF; }
+
+.td1c      {
+            text-align:center; }
+
+.tddarkc   {
+     	    text-align:center;
+	    font-size:10pt;
+            font-weight:normal; }
+
+.td2, .td2c, .td2e, .td2s, .td2cw, .td2w, .td2ww, .td2www, .td2gc, .td2cv, .td2r {
+            vertical-align:top;
+            background-color:#DCDCDC;
+            padding: 1px 4px 1px 4px;
+            border: 1px #AAAAAA solid;
+            color:#000000; }
+
+.td2r       {
+            border: 0;
+            border-right: 1px #AAAAAA solid; }
+
+.td2e       {  /* td2 fuer Wertungsspalten ER-Tab */
+            text-align:center; }
+
+.td2s       {  /* td2 fuer Wertungsspalten Skattab */
+            text-align:center; }
+
+.td2cw      { /* td1 fuer Wertungsspalten */
+            text-align:center; }
+
+.td2w      {  /* td2 fuer Wertungsspalten Ergwert */
+            position: relative;
+            left: 0; top: 0;
+            background-clip: padding-box;
+            text-align:center;
+            cursor: pointer; }
+
+.td2ww     {  /* td2 fuer Wertungsspalten */
+            text-align:center;
+            display: none;
+            cursor: pointer; }
+
+.td2www    {  /* td2 fuer Wertungsspalten */
+            text-align:center;
+            cursor: pointer; }
+
+.td2gc      { /* td2c fuer WerttabGes */
+            position: relative;
+            left: 0; top: 0;
+            background-clip: padding-box;
+            text-align:center; }
+
+.td2c      {
+            position: relative;
+            left: 0; top: 0;
+            background-clip: padding-box;
+            vertical-align:top;
+            text-align:center; }
+
+.td2cv     {
+            vertical-align:middle;
+            text-align:center; }
+
+.td2r      {
+            text-align:right; }
+
+.td3, .td3r, .td3www, .td3c, .td3pz, .td3cv {
+            vertical-align:top;
+            background-color:#DCDCDC;
+            font-weight:normal;
+            border: 1px #AAAAAA solid;
+            padding: 1px 4px 1px 4px;
+            color:#000000; }
+
+.td3r      {
+            position: relative;
+            left: 0; top: 0;
+            background-clip: padding-box;
+            text-align:center; }
+
+.td3www    {  /* td3 fuer Wertungsspalten */
+            text-align:center;
+            cursor: pointer; }
+
+.td3w      {  /* td3 fuer Wertungsspalten */
+            vertical-align:top;
+            text-align:center;
+            background-color:#FFFFFF;
+            font-weight:normal;
+            border: 1px #DCDCDC solid;
+            padding: 1px 4px 1px 4px;
+            color:#000000; }
+
+.pz        {
+            font-weight:bold;
+            color: #9696FF; }
+
+.td3c      {
+            text-align:center; }
+
+.td3pz     {
+            text-align:center;
+            font-weight:bold;
+            color: #DC0000; }
+
+.td3cv      {
+            vertical-align:middle;
+            text-align:center; }
+
+.td4, .td4c {
+            vertical-align:top;
+            background-color:#DCDCDC;
+            font-weight:bold;
+            font-style:italic;
+            border: 1px #AAAAAA solid;
+            color:#000000; }
+
+.td4c      {
+            text-align:center; }
+
+.td5 br { margin-bottom:5px; }
+
+.td5, .td5v, .td5cv, .td5c, .td5w, .td5e, .td5s {
+            vertical-align:top;
+            background-color:#FFFFFF;
+            border: 1px #DCDCDC solid;
+            padding: 1px 4px 1px 4px;
+            font-weight:normal;
+            color:#000000; }
+
+.td5v      {
+            vertical-align:middle; }
+
+.td5cv     {
+            vertical-align:middle;
+            text-align:center; }
+
+.td5c      {
+            text-align:center; }
+
+.td5w      {   /* td5 fuer Wertungsspalten Ergwert */
+            text-align:center;
+            cursor: pointer; }
+
+.td5e      {   /* td5 fuer Wertungsspalten ER-Tab */
+            text-align:center; }
+
+.td5s      {   /* td5 fuer Wertungsspalten SkatTab */
+            text-align:center; }
+
+.td6, .td6c  {
+            vertical-align:top;
+            background-color:#FFFFFF;
+            font-weight:normal;
+            font-style:italic;
+            border: 1px #DCDCDC solid;
+            padding: 1px 4px 1px 4px;
+            color:#000000; }
+
+.td6c      {
+            text-align:center; }
+
+/* Ergwert Standard bei voller Breite */
+.td2w {
+    display: none;
+}
+.td2ww {
+    display: table-cell;
+}
+.td5w {
+    display: none;
+}
+
+/* Dynamische Anpassung an Bilschirmgroessen */
+@media
+	only screen and (max-width: 1000px)  {
+        .mainback {
+            width: 100%;
+            padding: 10px;
+            margin-right: 0;
+            margin-left: 0;
+	    }
+        .maincontainer {
+            padding: 10px 10px 0 10px;
+        }
+        .eventhead {
+            padding: 7px 7px 7px 10px;
+        }
+        .td2w { word-break:break-all;word-wrap:break-word; }
+    }
+@media
+	only screen and (max-width: 767px)  {
+        /* #h7     { display: none; }
+        #t7     { display: none; } */
+        .compbutton { width: 80%; }
+        /* Ergwert */
+        /* .td2w  { display: none; }
+        .td5w  { display: none; }
+        .td2ww  { display: none; }
+        .td2www { display: none; }
+        .td3www { display: none; }
+        .ergwertinfo { display: none; } */
+
+        .td2c { word-break:break-all;word-wrap:break-word; }
+    }
+@media
+	only screen and (max-width: 600px)  {
+        .compbutton { width: 90%; }
+        .erimgdiv {
+            width: 80%;
+        }
+        /* Ergebnis */
+        .col1   { display: block; }
+        .td2cw  { display: none; }
+        .td3w   { display: none; }
+        /* ER-Tab */
+        .td2e   { display: none; }
+        .td5e   { display: none; }
+        .td2 { word-break:break-all;word-wrap:break-word; }
+    }
+
+/* Tooltips */
+.td2w .tooltip2w, .td2c .tooltip2c, .td2gc .tooltip2gc, .td3r .tooltip3r, .nar .tooltipnar {
+    visibility: hidden;
+    display: none;
+    width: 120px;
+    background-color: #F00000;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 47%;
+    margin-left: -60px;
+}
+
+.nar .tooltipnar {
+    width: 70px;
+    margin-left: -35px;
+}
+
+.td2gc .tooltip2gc {
+    top: 130%;
+}
+
+.td2w .tooltip2w::after, .td2c .tooltip2c::after, .td2gc .tooltip2gc::after, .nar .tooltipnar::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 47%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #F00000 transparent;
+}
+
+.td2w:hover .tooltip2w, .td2c:hover .tooltip2c, .td2gc:hover .tooltip2gc, .td3r:hover .tooltip3r, .nar:hover .tooltipnar {
+    visibility: visible;
+    display: initial;
+}
+
+.td3r .tooltip3r {
+    width: auto;
+    white-space: nowrap;
+    top: -5px;
+    left: 110%;
+    margin-left: 0;
+}
+
+.td3r .tooltip3r::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #F00000 transparent transparent;
+}
+
+.ergwertinfo {
+    margin-bottom:10px;
+}
+

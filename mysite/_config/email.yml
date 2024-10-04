@@ -8,12 +8,9 @@ SilverStripe\Core\Injector\Injector:
     class: Swift_SmtpTransport
     properties:
       Host: w017ecee.kasserver.com
-      # Host: w011fc25.kasserver.com
       Port: 587
       Encryption: tls
     calls:
-      Username: [ setUsername, ['m043cb7b'] ]
-      Password: [ setPassword, ['JyuzoNb43qT6eS6r'] ]
-      # Username: [ setUsername, ['m02e50fe'] ]
-      # Password: [ setPassword, ['342Ua849f4QmsCgu'] ]
+      Username: [ setUsername, ['m04c4e6e'] ]
+      Password: [ setPassword, ['SKbZ5ECr6uK3SbdQ'] ]
       AuthMode: [ setAuthMode, ['login'] ]

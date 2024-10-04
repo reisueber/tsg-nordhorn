@@ -24,13 +24,19 @@ input{ width: 100%; }
     border: 1px solid #f1f1f1;
 }
 
+.actions{
+	margin: 0 0 20px 0;
+}
+
 .controls{
 	margin: 10px 0 20px 0;
 }
 
 #TournamentForm{ padding: 10px 0 20px 0; }
 
-
+.profil-group.platzierung, .profil-group.typ{
+	display: none;
+}
 
 /* label */
 label{

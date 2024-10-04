@@ -40,7 +40,7 @@
 				<tr>
 					<td colspan="2" style="padding: 10px 20px;">
 						<div style="Margin: 10px 0 20px 0; line-height: 18px;">
-							<div style="Margin: 10px 0">Hallo Yvonne,</div>
+							<div style="Margin: 10px 0">Hallo Ivonne,</div>
 							<div style="Margin: 10px 0 0 0">
 								folgende Turniermeldung ist bei uns eingegangen:
 							</div>

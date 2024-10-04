@@ -28,8 +28,14 @@ class ReportListPage extends Page{
 		$twoweeks = strtotime( '-1 week' );
 		$twoweeksago = date( 'Y-m-d H:i:s', $twoweeks );
 		$currentReports = TournamentReport::get()->filter([
-			'Datum:GreaterThan' => $twoweeksago
+			'Datum:GreaterThan' => $twoweeksago,
+            'Status:Not'        => 'Turnier löschen'
 		]);
+		if(!Security::getCurrentUser()->inGroup('Sportwart')){
+            $currentReports = $currentReports->exclude([
+                'Status' => 'Vom Paar storniert'
+            ]);
+        }
 		$allReports = TournamentReport::get();
 		
 		return $this->isReportLibrary() ? $allReports : $currentReports;
@@ -65,9 +71,9 @@ class ReportListPage_Controller extends PageController{
 					'JUG'       => 'JUG',
 				    'HGR' 		=> 'HGR',
 					'HGR II' 	=> 'HGR II',
-					'SEN I' 	=> 'SEN I',
-					'SEN II' 	=> 'SEN II',
-                    'SEN III'   => 'SEN III'
+					'MASTER I' 	=> 'MASTER I',
+					'MASTER II' 	=> 'MASTER II',
+                    'MASTER III'   => 'MASTER III'
 				)),
 				//->setTemplate("MyDropDownField"),
 				DropdownField::create('Klasse', 'Klasse', array(
@@ -75,7 +81,8 @@ class ReportListPage_Controller extends PageController{
 					'C' => 'C',
 					'B' => 'B',
 					'A' => 'A',
-					'S' => 'S'
+					'S' => 'S',
+					'WDSF' => 'WDSF'
 				)),
 				//->setTemplate("MyDropDownField"),
 				OptionsetField::create('Type', 'Typ', ['Std' => 'Standard', 'Lat' => 'Latein'])

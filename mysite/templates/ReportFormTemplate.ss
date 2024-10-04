@@ -52,26 +52,42 @@
 			</div>
 		</div>
 
-		<div class="profil-group">
+		<div class="profil-group typ hide">
 			<div class="profil-item">
 				<label>Typ</label>
 				$Fields.dataFieldByName(TournamentType)
 			</div>
 		</div>
 
-		<div class="profil-group">
-			<div class="profil-item">
-				<label>Platzierung:</label>
-				$Fields.dataFieldByName(Platzierung)
-			</div>
-			<div class="profil-item">
-				<label>Gesamtplatzierungen:</label>
-				$Fields.dataFieldByName(Gesamtplatzierungen)
-			</div>
+		<div class="profil-group platzierung">
+			<% if $Fields.dataFieldByName(Platzierung) %>
+				<div class="profil-item">
+					<label>Platzierung:</label>
+					$Fields.dataFieldByName(Platzierung)
+				</div>
+			<% end_if %>
+			<% if $Fields.dataFieldByName(Gesamtplatzierungen) %>
+				<div class="profil-item">
+					<label>Gesamtplatzierungen:</label>
+					$Fields.dataFieldByName(Gesamtplatzierungen)
+				</div>
+			<% end_if %>
 		</div>
+
+		<div class="profil-group platzierung">
+			<% if $Fields.dataFieldByName(Grund) %>
+				<div class="profil-item">
+					<label>Grund:</label>
+					$Fields.dataFieldByName(Grund)
+				</div>
+			<% end_if %>
+		</div>
+
 		<!-- hiddenFields -->
-		$Fields.dataFieldByName(ReportId)
-		$Fields.dataFieldByName(Status)
+		<div>
+			$Fields.dataFieldByName(ReportId)
+			$Fields.dataFieldByName(Status)
+		</div>
 		<div class="clear"><!-- --></div>
 	</fieldset>
 

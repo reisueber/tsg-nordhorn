@@ -33,9 +33,9 @@
 		</form>
 		<% if $CurrentUser %>
 			<a href="Security/logout" class="button button-pill button-border-primary"><i class="fa fa-sign-out"></i> <span>Logout</span></a>
-			<!--<a href="/profil-edit" class="button button-pill button-border-primary">
+			<a href="/profil-edit" class="button button-pill button-border-primary">
 				<i class="fa fa-user"></i> Profil
-			</a>-->
+			</a>
 		<% else %>
 			<a href="Security/login" class="login button button-pill button-border-primary"><i class="fa fa-key"></i> Login</a>
 		<% end_if %>

@@ -53,11 +53,10 @@ class PressPage extends Page{
 	}
 
 	public function isAdmin(){
-		/*if( $user = Security::getCurrentUser() )
+		if( $user = Security::getCurrentUser() )
 		{
 			return $user->inGroup('Administratoren');
-		}*/
-		return true;
+		}
 	}
 
 }

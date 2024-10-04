@@ -22,6 +22,13 @@
 							<div class="job"><h2>$committeePosition</h2></div>
 							<div class="name">$FullName</div>
 						</div>
+						<% if committeeEmail %>
+							<div class="email">
+								<a class="button button-pill" href="verein/vorstand/mailLink?id=$ID">
+									<i class="fa fa-envelope"></i>&nbsp;&nbsp;E-Mail schreiben
+								</a>
+							</div>
+						<% end_if %>
 						<div class="description">$committeeDescription</div>
 					</div>
 				</div>
